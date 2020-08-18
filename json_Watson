@@ -1,0 +1,397 @@
+{
+  "intents": [
+    {
+      "intent": "Greetings",
+      "examples": [
+        {
+          "text": "Good afternoon"
+        },
+        {
+          "text": "Hii"
+        },
+        {
+          "text": "Are you there"
+        },
+        {
+          "text": "Good Morning"
+        },
+        {
+          "text": "Hey"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "product_faq",
+      "examples": [
+        {
+          "text": "how to turn off"
+        },
+        {
+          "text": "how to use the product"
+        },
+        {
+          "text": "how to turn on"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "location",
+      "examples": [
+        {
+          "text": "where is your shop?"
+        },
+        {
+          "text": "how to reach to your shop"
+        },
+        {
+          "text": "aap tak kaise pahuche Sir"
+        },
+        {
+          "text": "ap tak kese pohche sirji"
+        },
+        {
+          "text": "which area is your store located"
+        },
+        {
+          "text": "send me location of your store"
+        },
+        {
+          "text": "how to reach to your store"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "greetings_hi",
+      "examples": [
+        {
+          "text": "namaste"
+        },
+        {
+          "text": "namaskar"
+        },
+        {
+          "text": "heyyoo"
+        },
+        {
+          "text": "hailo"
+        },
+        {
+          "text": "hiiiii"
+        },
+        {
+          "text": "kia ora"
+        },
+        {
+          "text": "helloooiii"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "hiiii"
+        },
+        {
+          "text": "heyyyyyyy"
+        },
+        {
+          "text": "hey"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "entity": "location",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Hinjewadi",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Pimple Saudagar",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Aundh",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Shivajinagar",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Greetings",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Hello",
+          "synonyms": [
+            "hi",
+            "hey",
+            "kya bolti public"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Good Morning",
+          "synonyms": [
+            "gm",
+            "gud mrng"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "webhooks": [
+    {
+      "url": "https://eu-gb.functions.appdomain.cloud/api/v1/web/ishan.sr07%40gmail.com_dev/default/discovery-action.json",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Firse mehnat krke aa chal"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_4_1597492333542",
+      "conditions": "anything_else",
+      "dialog_node": "response_2_1597493870454",
+      "previous_sibling": "response_6_1597493866668"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "<?context.webhook_result_1.passages.get(0).get(\"passage_text\").getAsString() ?>"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1597492333542",
+      "conditions": "$webhook_result_1",
+      "dialog_node": "response_6_1597493866668"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "We have four stores in and around Pune : Hinjewadi, Shivajinagar, Aundh and Pimple Saudagar"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1597487927822",
+      "conditions": "#location",
+      "dialog_node": "response_6_1597488292528"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. I am HELIOS, helper at Srivastava Stores. You can talk to me regarding products, shop locations, and product FAQ. "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "conditions": "#Greetings",
+      "dialog_node": "response_4_1597677827217",
+      "previous_sibling": "response_10_1597677813554"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. I am HELIOS, helper at Srivastava Stores. You can talk to me regarding products, shop locations, and product FAQ. "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "conditions": "#greetings_hi",
+      "dialog_node": "response_10_1597677813554"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello Dear. How may i help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1597486687737",
+      "conditions": "#Greetings",
+      "dialog_node": "response_4_1597486922006"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              },
+              {
+                "text": "Apne ko samjhaich nai"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_4_1597492333542",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "product_faq",
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "input": "<? input.text ?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#product_faq",
+      "dialog_node": "node_4_1597492333542",
+      "previous_sibling": "node_7_1597487927822"
+    },
+    {
+      "type": "standard",
+      "title": "Greetings",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Greetings || #greetings_hi",
+      "dialog_node": "node_4_1597486687737",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "location",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#location || @location",
+      "dialog_node": "node_7_1597487927822",
+      "previous_sibling": "node_4_1597486687737"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#greetings_hi || welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "My first skill",
+  "language": "en",
+  "description": ""
+}
